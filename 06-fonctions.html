@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours Malick</title>
+</head>
+<body>
+  <h1>Fonctions</h1>
+  <script>
+    
+    function direBonjour() {
+      console.log('Bonjour');
+    }
+
+    function direAurevoir() {
+      console.log('Aurevoir');
+
+      return false
+    }
+
+    console.log('1', direBonjour)
+    console.log('2', direBonjour())
+
+    console.log('1', direAurevoir)
+    console.log('2', direAurevoir())
+
+
+
+    const direCoucou = function() {
+      console.log('coucou');
+    }
+
+    direCoucou()
+
+
+    const addition = function(nb1, nb2) {
+      const resultat = nb1 + nb2
+
+      return resultat
+    }
+
+    console.log(addition(3, 4))
+
+  </script>
+</body>
+</html>
