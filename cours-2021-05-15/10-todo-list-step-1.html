@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours Malick</title>
+</head>
+<body>
+  <h1>Todo list step 1</h1>
+  <ul id="list">
+   <li>Tache 1</li>
+   <li>Tache 2</li>
+   <li>Tache 3</li>
+  </ul>
+  <form id="myForm">
+    <input type="text" id="input">
+    <input type="submit" value="Ajouter à la liste">
+  </form>
+  <script>
+  
+    const formulaireSoumit = (event) => {
+      event.preventDefault()
+      // https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement
+      const newItem = document.createElement('li')
+      newItem.innerText = input.value
+      // https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild
+      list.appendChild(newItem)
+
+      input.value = ""
+    }
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
+    const form = document.getElementById('myForm')
+    const input = document.getElementById('input')
+    const list = document.getElementById('list')
+    form.addEventListener('submit', formulaireSoumit)
+
+  </script>
+</body>
+</html>
