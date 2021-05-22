@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prototype</title>
+</head>
+<body>
+    <script>
+      // premier example
+      // const a = "Kevin";
+      // console.log(a.__proto__)
+      // console.log(a.substr(2, 3))
+
+      class Animal {
+        type = null
+        pattes = null
+
+        constructor(type = "mamifère", pattes = 2) {
+          this.type = type
+          this.pattes = pattes
+        }
+
+        mourir() {
+          console.log("l'animal est mort...")
+        }
+      }
+
+      class Oiseau extends Animal{
+        constructor() {
+          super()
+          this.type = "oiseau"
+        }
+      }
+
+      const horus = new Animal("chien", 4)
+      const roucool = new Oiseau()
+
+    </script>
+</body>
+</html>
