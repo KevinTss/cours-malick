@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <title>Devoir à faire Malick</title>
+  </head>
+
+  <body>
+    <h1>Liste à faire</h1>
+    <!---Creation d'un formulaire de la liste des éléments à ajouter  --->
+    <form action="#" method="post">
+      <div>
+        <label for="myInput">Ajout élément </label>
+        <input
+          type="text"
+          name="myInput"
+          id="myInput"
+          placeholder="Nouvel élément"
+        />
+        <input type="submit" value="Valider" />
+      </div>
+    </form>
+    <!--- Liste ordonée d'éléments --->
+    <ol id="list"></ol>
+
+    <script>
+      const ajout = document.querySelector('#list');
+      const form = document.querySelector('form');
+      const field = document.querySelector('#myInput');
+
+      const delButtonClass = 'delete-button';
+      const updateButtonClass = 'update-button';
+      const deleteButtonHtml = `<button class='${delButtonClass}'>delete</button>`;
+      const getUpdateButtonHtml = function (text) {
+        return `<button class='${updateButtonClass}'>${text}</button>`;
+      };
+
+      const state = {
+        list: [
+          {
+            label: 'Tache 1',
+            isEdit: false,
+          },
+          {
+            label: 'Tache 2',
+            isEdit: false,
+          },
+          {
+            label: 'Tache 3',
+            isEdit: false,
+          },
+        ],
+      };
+
+      function render() {
+        ajout.innerHTML = '';
+        let innerHTML = '';
+        state.list.forEach(function (element, index) {
+          let el = element.label;
+          let delElement = deleteButtonHtml;
+          let updateElement = getUpdateButtonHtml('update');
+
+          if (element.isEdit) {
+            el = `<input type='text' id='input-update-${index}' value='${element.label}'/>`;
+            delElement = '';
+            updateElement = getUpdateButtonHtml('confirm');
+          }
+
+          innerHTML = `
+                ${innerHTML}
+                <li>
+                    <span>${el}</span>
+                    ${delElement}
+                    ${updateElement}
+                </li>`;
+        });
+
+        ajout.innerHTML = innerHTML;
+
+        // creer function delete pour chaque delete bouton
+        const deleteButtonsCollection =
+          document.getElementsByClassName(delButtonClass);
+        const deleteButtonsArray = Array.from(deleteButtonsCollection);
+        deleteButtonsArray.forEach(function (element, index) {
+          element.addEventListener('click', function (event) {
+            state.list.splice(index, 1);
+            render();
+          });
+        });
+        // creer function update pour chaque update bouton
+        const updateButtonsCollection =
+          document.getElementsByClassName(updateButtonClass);
+        const updateButtonsArray = Array.from(updateButtonsCollection);
+        updateButtonsArray.forEach(function (element, index) {
+          element.addEventListener('click', function (event) {
+              if (event.target.textContent === 'update') {
+                  state.list[index].isEdit = true;
+              } else if (event.target.textContent === 'confirm') {
+                  const updateInput = document.getElementById(`input-update-${index}`)
+                  state.list[index].isEdit = false;
+                  state.list[index].label = updateInput.value;
+              }
+
+            render();
+          });
+        });
+      }
+      render();
+
+      form.addEventListener(
+        'submit',
+        function (event) {
+          event.preventDefault();
+          let text = field.value;
+          if (text !== '') {
+            state.list.push({
+              label: text,
+              isEdit: false,
+            });
+            field.value = '';
+            render();
+          }
+        },
+        false
+      );
+    </script>
+  </body>
+</html>
