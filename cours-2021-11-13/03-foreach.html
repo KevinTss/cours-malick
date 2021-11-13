@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Foreach</title>
+  </head>
+  <body>
+    <h1>Foreach</h1>
+
+    <script>
+      Array.prototype.customForEach = function(fct) {
+        for (let i = 0; i < this.length; i++) {
+          fct(this[i], i, this)
+        }
+      }
+      const list = ['Kevin', 'Malick']
+      list.forEach(function(element, index, array){
+        console.log('element', element)
+        console.log('index', index)
+        console.log('array', array)
+      })
+      list.customForEach(function(element, index, array){
+        console.log('element custom', element)
+        console.log('index custom', index)
+        console.log('array custom', array)
+      })
+
+
+      console.log('list', list.forEach)
+      console.log('list', list.customForEach)
+
+
+      // function customForeach(tableau, fct) {
+      //   for (let i = 0; i < tableau.length; i++) {
+      //     fct(tableau[i], i, tableau)
+      //   }
+      // }
+
+      // customForeach(list, function(element, index, array){
+      //   console.log('element custom', element)
+      //   console.log('index custom', index)
+      //   console.log('array custom', array)
+      // })
+
+
+    </script>
+  </body>
+</html>
