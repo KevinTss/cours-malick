@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Devoir à faire Malick</title>
+</head>
+
+<body>
+
+    <h1> Liste à faire</h1>
+    <!---Creation d'un formulaire de la liste des éléments à ajouter  --->
+    <form action="#" method="post">
+        <div>
+            <label for="myInput">Ajout élément </label>
+            <input type="text" name="myInput" id="myInput" placeholder="Nouvel élément" />
+            <input type="submit" value="Valider" />
+        </div>
+    </form>
+    <!--- Liste ordonée d'éléments --->
+    <ol id="list"></ol>
+
+    <script>
+      const ajout = document.querySelector('#list');
+      const form = document.querySelector('form');
+      const field = document.querySelector('#myInput');
+
+      const delButtonClass = 'delete-button'
+      const deleteButtonHtml = `<button class='${delButtonClass}'>delete</button>`
+
+      const state = {
+          list: ["tache 1", 'coucou', "douche", 'cuisine']
+      }
+
+      function render () {
+        ajout.innerHTML = ''
+        let innerHTML = ''
+        state.list.forEach(function(element) { 
+            innerHTML = `${innerHTML}<li>${element}${deleteButtonHtml}</li>`
+         })
+
+         ajout.innerHTML = innerHTML
+
+         const deleteButtonsCollection = document.getElementsByClassName(delButtonClass)
+         const deleteButtonsArray = Array.from(deleteButtonsCollection)
+         deleteButtonsArray.forEach(function(element, index){
+            element.addEventListener('click', function(event){
+                state.list.splice(index, 1)
+                render()
+            })
+         })
+      }
+      render()
+
+      form.addEventListener('submit', function(event) {
+          event.preventDefault();
+          let text = field.value;
+          if (text !== '') {
+              state.list.push(text)
+              field.value = ''
+              render()
+            }
+      }, false);
+    </script>
+</body>
+
+</html>
